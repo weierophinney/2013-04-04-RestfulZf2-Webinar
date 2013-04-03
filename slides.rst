@@ -54,6 +54,8 @@ Level 0
 **HTTP to tunnel RPC**
 
 .. image:: images/rmm-level0.png
+    :align: center
+    :width: 14cm
 
 Level 1
 =======
@@ -61,6 +63,8 @@ Level 1
 **Resources** (multiple endpoints)
 
 .. image:: images/rmm-level1.png
+    :align: center
+    :width: 14cm
 
 
 Level 2
@@ -69,6 +73,8 @@ Level 2
 **HTTP verbs**
 
 .. image:: images/rmm-level2.png
+    :align: center
+    :width: 14cm
 
 Level 3
 =======
