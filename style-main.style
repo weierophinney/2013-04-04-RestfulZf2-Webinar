@@ -144,4 +144,5 @@ styles:
 
     centredtitle:
         parent: heading1
+        fontSize: 150%
         alignment: TA_CENTER
