@@ -80,12 +80,12 @@ Level 3: Hypermedia Types: Representations
 
 .. code-block:: javascript
 
-    /* application/vnd.recipes+json \*/
+    // application/vnd.recipes+json
     {
         "id": "identifier",
         "name": "Recipe name",
         "ingredients": [
-            /* ingredient objects \*/
+            // ingredient objects
         ],
         "directions": "Directions for cooking"
     }
@@ -98,17 +98,17 @@ Level 3: Linking
     {
         "_links": {
             "self": {
-                "href": "http://example.org/api/recipes/1234"
+                "href": "http://example.com/api/recipes/1234"
             },
             "describedby": {
-                "href": "http://example.org/api/resources/recipe"
+                "href": "http://example.com/api/resources/recipe"
             }
         }
-        /* ... \*/
+        // ...
     }
 
 .. Talk about other link use cases: pagination, linking to related resources,
-etc.
+.. etc.
 
 Level 3: Embedding
 ==================
@@ -120,14 +120,121 @@ Level 3: Embedding
             "addresses": [
                 {
                     "_links": {"self": {
-                        "href": "http://example.org/api/addresses/5678"
+                        "href": "http://example.com/api/addresses/5678"
                     }},
-                    /* a representation \*/
+                    // a representation
                 }
             ]
         }
-        /* ... \*/
+        // ... 
     }
+
+.. raw:: pdf
+
+    PageBreak titlePage
+
+.. class:: centredtitle
+
+Aside: Hypermedia Application Language
+
+.. raw:: pdf
+
+    PageBreak standardPage
+
+Which media type should I use?
+==============================
+
+* Vendor-specific? *(e.g., application/vnd.myorg.recipe+json)*
+* Fully generic? *(e.g., application/json)*
+
+A happy medium: HAL
+===================
+
+**application/hal+json**
+
+* Describes hypermedia links
+* Describes how to embed resources, either as parts of other resources or parts
+  of collections
+* Otherwise retains your object structure
+
+HAL: Resource
+=============
+
+.. code-block:: javascript
+
+    {
+        "_links": {
+            "self": {
+                "href": "http://example.com/api/recipes/cacio-e-pepe"
+            }
+        },
+        "id": "cacio-e-pepe",
+        "name": "Cacio e Pepe Pasta"
+    }
+
+.. Talk about self link as being required
+
+HAL: Embedded resource
+======================
+
+.. code-block:: javascript
+
+    {
+        "_links": {"self": {"href": "..."}},
+        "_embedded": {
+            "author": {
+                "_links": {"self": {"href": "..."}},
+                "id": "mario",
+                "name": "Mario Mario"
+            }
+        }
+        // ...
+    }
+
+.. Note that the style is name => object, and that embedded resources
+.. also have links.
+
+
+HAL: Collections
+================
+
+.. code-block:: javascript
+
+    {
+        "_links": {
+            "self": {"href": "..."},
+            "next": {"href": "..."},
+            "prev": {"href": "..."},
+            "first": {"href": "..."},
+            "last": {"href": "..."}
+        },
+        // ...
+    }
+
+.. Talk about relational links!
+
+HAL: Collections
+================
+
+.. code-block:: javascript
+
+    {
+        // ...
+        "_embedded": {
+            "recipes": [
+                {
+                    "_links": { "self": { "href": "..." } },
+                    "id": "cacio-e-pepe",
+                    "name": "Cacio e Pepe Pasta"
+                },
+                // ...
+            ]
+        },
+        "and-other-properties": "if desired"
+    }
+
+.. Discuss that this is the same format to use in a single resource as well,
+.. when an "object" is actually a collection of objects, such as addresses.
 
 .. raw:: pdf
 
@@ -147,4 +254,5 @@ Areas of Concern
 * Routing (unique URLs per resource, link generation)
 * ``AbstractRestfulController`` (HTTP method negotiation)
 * View Models and Renderers (media-type negotiation and resource representations)
+
 

@@ -108,7 +108,7 @@ styles:
 
     code:
         parent: literal
-        fontSize: 12
+        fontSize: 12 
         leftIndent: 0
         spaceBefore: 8
         spaceAfter: 8
