@@ -21,7 +21,8 @@ Who I am
 
 Just this guy:
 
-* Project Lead, Zend Framework
+* Project Lead,
+  Zend Framework
 * Open Source enthusiast
 * Coffee lover
 * Chocolate lover
@@ -371,7 +372,7 @@ Example: options
         } else {
             $options = $this->collectionOptions;
         }
-        $response = $this->getResponse()
+        $response = $this->getResponse();
         $response->getHeaders()
             ->addHeaderLine('Allow', implode(',', $options));
         return $response;
@@ -403,10 +404,11 @@ Example: listener (2)
         } else {
             $options = $this->collectionOptions;
         }
-        if (!in_array($e->getRequest()->getMethod(), $options)) {
+        if (in_array($e->getRequest()->getMethod(), $options)) {
+            // HTTP method is allowed!
             return;
         }
-        $response = $this->getResponse()
+        $response = $this->getResponse();
         $response->setStatusCode(405); // Method Not Allowed
         return $response;
     }
